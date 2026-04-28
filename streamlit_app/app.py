@@ -177,7 +177,7 @@ def plotly_layout(fig, height=400):
 def load_data():
     try:
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        data_path = os.path.join(script_dir, '..', 'data', 'zomato_cleaned.csv')
+        data_path = os.path.join(script_dir, '..', 'zomato_cleaned.csv')
         df = pd.read_csv(data_path)
 
         # Numeric coercion for rate
