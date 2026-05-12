@@ -140,7 +140,7 @@ def kpi_card(title, value, subtitle=""):
 
 
 def add_header():
-    total = st.session_state.data['name'].nunique() if 'data' in st.session_state and not st.session_state.data.empty else 0
+    total = len(st.session_state.data) if 'data' in st.session_state and not st.session_state.data.empty else 0
     locations = st.session_state.data['location'].nunique() if total > 0 else 0
     st.markdown(f"""
     <div class="header">
@@ -199,12 +199,6 @@ def load_data():
         if 'votes' in df.columns:
             df['votes'] = pd.to_numeric(df['votes'], errors='coerce')
 
-        # Drop duplicate restaurants — same name + location = same restaurant
-        # Raw CSV has ~12k rows due to restaurants listed under multiple meal types
-        dedup_cols = [c for c in ['name', 'location'] if c in df.columns]
-        if dedup_cols:
-            df = df.drop_duplicates(subset=dedup_cols, keep='first').reset_index(drop=True)
-
         return df
     except Exception as e:
         st.error(f"Error loading data: {e}")
@@ -228,7 +222,7 @@ if page == "City Overview":
     add_header()
 
     if not df.empty:
-        total_restaurants = df['name'].nunique()  # Count unique restaurants, not rows
+        total_restaurants = len(df)  # Count all rows — each row is one unique restaurant
         avg_city_rating = df['rate'].mean() if not df['rate'].isna().all() else 0
         most_popular_area = (
             df['location'].value_counts().index[0]
