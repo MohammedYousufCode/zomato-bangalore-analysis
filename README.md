@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit%20App-FF4B4B?style=for-the-badge)](https://zomato-bangalore-analysis.streamlit.app)
 
-End-to-end data analytics project on 8,723 unique Bangalore restaurants — covering data cleaning, PostgreSQL, EDA, and an interactive Streamlit dashboard.
+End-to-end data analytics project on 12,037 unique Bangalore restaurants — covering data cleaning, PostgreSQL, EDA, and an interactive Streamlit dashboard.
 
 ---
 
@@ -41,7 +41,7 @@ When I found this dataset on Kaggle, I recognised patterns I had already lived. 
 
 ```bash
 # Clone and navigate
-git clone https://github.com/yourusername/zomato-bangalore-analysis.git
+git clone https://github.com/mohammed-yousuf-aiml/zomato-bangalore-analysis.git
 cd zomato-bangalore-analysis
 
 # Install dependencies
@@ -59,10 +59,10 @@ The Streamlit app is fully self-contained — all cleaned data and visualization
 
 | Metric | Value | Context |
 |--------|-------|---------|
-| **Restaurants Analyzed** | 8,723 | After deduplication of 51,000 raw rows |
+| **Restaurants Analyzed** | 12,037 | After cleaning 51,000 raw rows |
 | **Geographic Coverage** | 93 areas | Across Bangalore |
 | **Average Rating** | 3.63 / 5.0 | With median 3.70 (slight left skew) |
-| **Rating Range** | 2.8 – 4.9 | Fine Dining leads at 4.1 avg |
+| **Rating Range** | 1.8 – 4.9 | Fine Dining leads at 4.1 avg |
 | **Highest Low-Rated Area** | Whitefield | 211 restaurants below 3.5 rating |
 | **Best-Rated Area** | Lavelle Road | 4.1 average rating |
 | **Price-Quality Correlation** | +0.40 | Clear trend: higher price = higher, more consistent rating |
@@ -88,7 +88,7 @@ The Streamlit app is fully self-contained — all cleaned data and visualization
 | Stage | Rows |
 |---|---|
 | Raw (`zomato.csv`) | ~51,000 |
-| After cleaning & dedup | **8,723 unique restaurants** |
+| After cleaning | **12,037 unique restaurants** |
 
 ### Data Dictionary (Final Clean Dataset)
 
@@ -96,7 +96,7 @@ The Streamlit app is fully self-contained — all cleaned data and visualization
 |--------|------|-------------|-------|
 | `name` | string | Restaurant name | Unique within location |
 | `location` | string | Bangalore area | 93 unique areas |
-| `rate` | float | Customer rating | 2.8–4.9 scale, NaN for new restaurants |
+| `rate` | float | Customer rating | 1.8–4.9 scale, NaN for new restaurants |
 | `cost_for_two` | int | Price for two people (₹) | ₹100–₹5,500 range |
 | `cuisines` | string | Cuisine types | Comma-separated, multi-cuisine common |
 | `rest_type` | string | Restaurant classification | Casual, Fine, Cafe, Quick Bites, etc. |
@@ -113,12 +113,11 @@ The Streamlit app is fully self-contained — all cleaned data and visualization
 - **`approx_cost(for two people)`:** Comma-formatted strings stripped and cast to `int`, renamed to `cost_for_two`
 - **`online_order` / `book_table`:** Mapped `Yes/No` → `1/0`
 - **Nulls:** Rows with nulls in `location`, `rest_type`, `cuisines`, `cost_for_two` dropped
-- **Deduplication:** Same restaurant listed multiple times under different `listed_in(type)` values (Delivery, Dine-out, Buffet, etc.). Deduplicated on `name + location`, keeping the row with the highest `votes`. 
-  - **Result:** 8,723 unique restaurants across 93 areas
+  - **Result:** 12,037 unique restaurants across 93 areas
 
 **Quality checks applied:**
 - No negative votes or costs
-- Ratings within valid range (2.8–4.9 or NaN)
+- Ratings within valid range (1.8–4.9 or NaN)
 - No duplicate name + location pairs
 - All string columns trimmed of whitespace
 
@@ -247,7 +246,7 @@ The analysis includes **7 high-quality static visualizations** (see `visuals/` f
 
 ```bash
 # Clone and navigate
-git clone https://github.com/yourusername/zomato-bangalore-analysis.git
+git clone https://github.com/mohammed-yousuf-aiml/zomato-bangalore-analysis.git
 cd zomato-bangalore-analysis
 
 # Install dependencies
@@ -331,10 +330,10 @@ zomato-bangalore-analysis/
 │
 ├── 📄 README.md                                    # This file
 ├── 📄 LICENSE                                      # MIT License
-├── 📄 zomato_cleaned.csv                           # Final clean dataset (8,723 rows)
+├── 📄 zomato_cleaned.csv                           # Final clean dataset (12,037 rows)
 │
-├── 📁 data/
-│   └── zomato.csv                                  # Raw dataset (51,000 rows)
+├── 📁 data/                                        # ⚠️ gitignored — not pushed to GitHub
+│   └── zomato.csv                                  # Raw dataset (~51,000 rows)
 │
 ├── 📁 notebooks/                                   # Jupyter analysis notebooks
 │   ├── 01_data_exploration.ipynb                  # Understand raw data
@@ -432,8 +431,8 @@ I'm a **final-year BCA student** specializing in data analytics and AI/ML. This 
 
 **Connect with me:**
 - 💼 [LinkedIn](https://linkedin.com/in/mohammed-yousuf-aiml)
-- 🐙 [GitHub](https://github.com/yourusername)
-- 📧 [Email](mailto:your.email@example.com)
+- 🐙 [GitHub](https://github.com/mohammed-yousuf-aiml)
+- 📧 [Email](mailto:mohammed.yousuf.aiml@gmail.com)
 
 ---
 
