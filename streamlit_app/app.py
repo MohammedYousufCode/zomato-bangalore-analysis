@@ -450,15 +450,18 @@ elif page == "Cuisine & Restaurant Explorer":
                 return any(cuisine in cuisines_list for cuisine in selected_cuisines)
             filtered_df = filtered_df[filtered_df['cuisines'].apply(cuisine_match)]
 
-        filtered_df = filtered_df[
-            (filtered_df['cost_for_two'] >= min_cost) &
-            (filtered_df['cost_for_two'] <= max_cost)
-        ]
+        cost_mask = (
+            filtered_df['cost_for_two'].isna() |
+            ((filtered_df['cost_for_two'] >= min_cost) &
+            (filtered_df['cost_for_two'] <= max_cost))
+        )
+        filtered_df = filtered_df[cost_mask]
 
-        filtered_df = filtered_df[
-            (filtered_df['rate'] >= min_rating) &
-            (filtered_df['rate'].notna())
-        ]
+        rate_mask = (
+        filtered_df['rate'].isna() |
+        (filtered_df['rate'] >= min_rating)
+        )
+        filtered_df = filtered_df[rate_mask]
 
         # KPIs
         filtered_count = len(filtered_df)
