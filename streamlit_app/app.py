@@ -424,13 +424,13 @@ elif page == "Cuisine & Restaurant Explorer":
             step=50
         )
 
-        # Min rating slider
+        min_rating_data = float(df['rate'].dropna().min()) 
         min_rating = st.sidebar.slider(
-            "Minimum Rating",
-            min_value=2.0,
-            max_value=5.0,
-            value=2.0,
-            step=0.1
+        "Minimum Rating",
+        min_value=min_rating_data,   
+        max_value=5.0,
+        value=min_rating_data,       
+        step=0.1
         )
 
         # Apply filters
